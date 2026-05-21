@@ -1,0 +1,189 @@
+:root {
+  --color-bg: #fafaf8;
+  --color-surface: #ffffff;
+  --color-text: #222222;
+  --color-muted: #666666;
+  --color-border: #e8e2d4;
+  --color-accent: #f5c842;
+  --color-accent-strong: #dca90d;
+  --shadow-soft: 0 14px 40px rgba(34, 34, 34, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+.site-header,
+.site-footer {
+  padding: 24px;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: min(1040px, 100%);
+  margin: 0 auto;
+}
+
+.logo {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 1.1;
+}
+
+.site-header p,
+.site-footer p {
+  color: var(--color-muted);
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 440px);
+  gap: 32px;
+  width: min(1040px, calc(100% - 48px));
+  margin: 24px auto 32px;
+  align-items: start;
+}
+
+.input-panel,
+.preview-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+}
+
+.input-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px;
+}
+
+.preview-panel {
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+  padding: 28px;
+}
+
+h2 {
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.field-group {
+  display: grid;
+  gap: 8px;
+}
+
+label {
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  color: var(--color-text);
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+input:focus {
+  border-color: var(--color-accent-strong);
+  outline: 3px solid rgba(245, 200, 66, 0.35);
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 18px;
+  color: #222222;
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent-strong);
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.download-button:hover {
+  background: #ffd958;
+}
+
+.download-button:focus-visible {
+  outline: 3px solid rgba(245, 200, 66, 0.45);
+  outline-offset: 2px;
+}
+
+.qr-preview {
+  display: grid;
+  place-items: center;
+  width: min(320px, 100%);
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.qr-preview canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.site-footer {
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .site-header,
+  .site-footer {
+    padding: 20px;
+  }
+
+  .header-inner {
+    align-items: flex-start;
+  }
+
+  .app-shell {
+    grid-template-columns: 1fr;
+    width: min(100% - 32px, 420px);
+    gap: 20px;
+    margin-top: 12px;
+  }
+
+  .input-panel,
+  .preview-panel {
+    padding: 20px;
+  }
+
+  .qr-preview {
+    min-height: min(320px, calc(100vw - 72px));
+  }
+}
