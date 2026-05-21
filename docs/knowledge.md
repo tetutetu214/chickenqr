@@ -74,6 +74,21 @@
 - さらに `~/.secrets/` を確認したところ OpenAI API キーは存在せず、ChatGPT Plus 加入のみだった
 - **教訓**: Codex の能力範囲を整理して伝える。「Codex で X できる？」に対しては「Codex はコーディングエージェント、API 呼び出しは別手段が必要」と即答できるように
 
+### 2026-05-22: snap 版 gh の `gh pr merge` ローカル fast-forward 失敗
+- `gh pr merge` を実行すると `git: 'remote-https' is not a git command. ! warning: not possible to fast-forward to: main` というエラーが出た
+- リモート側の squash マージ自体は完了している（GitHub Web 上で PR が MERGED 状態）
+- 失敗するのは「ローカル main を origin/main に同期する」内部処理の部分
+- 原因: snap 版 gh は内蔵 git が `git-remote-https` ヘルパーを解決できないため、内部の git fetch/pull が失敗する
+- **回避策**: PR マージは `gh api repos/<owner>/<repo>/pulls/<n>/merge -X PUT -f merge_method=squash` で REST API 直叩き。ローカルは `git fetch origin main && git reset --hard origin/main` で別途同期する
+- memory `reference_gh_snap_remote_https.md` の経験則を本プロジェクトでも踏襲、初手から `gh api` を使うのが安全
+
+### 2026-05-22: Phase 1 MVP は Codex 委譲が完璧に機能
+- 委譲プロンプトに「commit/push/E2E 検証は Claude 側でやる」「Co-Authored-By 提案不要」を明記したところ、Codex は要求範囲内で 3 ファイル（318 行）を生成し終了した
+- 生成された app.js は qr-code-styling パラメータを spec 通り（errorCorrectionLevel='H', imageSize=0.35 など）守り、JSDoc・debounce・初期描画・PNG DL 全てカバー
+- styles.css は卵色 `#f5c842` アクセント、640px ブレイクポイントで 1 カラム化、`clamp()` + `min()` でモダンなレスポンシブ
+- index.html は `lang="ja"`、`defer`、favicon、メタ description まで網羅
+- **教訓**: Codex 委譲時の委譲プロンプトは「やってほしいこと」「やってはいけないこと」「完了報告フォーマット」の3点を明示するだけで品質が安定する。固定値は数値レベルで仕様に書き出しておくと取りこぼしがない
+
 ---
 
 ## 参考リンク

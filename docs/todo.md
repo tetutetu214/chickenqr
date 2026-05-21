@@ -1,59 +1,46 @@
 # todo.md — ChickenQR タスク管理
 
 ## 現在のフェーズ
-**Phase 0 (プロジェクト初期化) — GitHub repo 作成・Cloudflare 連携待ち**
+**Phase 0-C (Cloudflare Pages 連携) — てつてつ手動作業待ち**
 
 ---
 
 ## 未完了タスク
 
-### 計画フェーズ
-- [ ] plan.md / spec.md / CLAUDE.md をてつてつが最終確認
-- [ ] 新技術導入時の理解度テスト（qr-code-styling / errorCorrectionLevel / Cloudflare Pages の概念）
-
-### Phase 0-B: GitHub リポジトリ作成
-- [ ] `git init` → ローカルでリポジトリ初期化
-- [ ] `.gitignore` を作成（OS固有ファイル、エディタ設定など）
-- [ ] GitHub リポジトリ `tetutetu214/chickenqr` をパブリックで作成（Claude が `gh repo create` で実行可）
-- [ ] Secret Scanning + Push Protection を有効化（Claude が `gh api` で実行可、memory `feedback_gh_api_nested_fields.md` 注意）
-- [ ] 初回コミット & push（docs/ + CLAUDE.md + image/Chicken.png）
-
 ### Phase 0-C: Cloudflare Pages 連携 + DNS（てつてつ手動・Cloudflare ダッシュボード）
-- [ ] Cloudflare Pages にプロジェクト作成、GitHub リポジトリ連携
-- [ ] ビルドコマンド: なし、出力ディレクトリ: ルート
+
+`docs/deploy.md` の手順に従って実行。
+
+- [ ] Cloudflare Pages にプロジェクト作成、GitHub `tetutetu214/chickenqr` 連携
+- [ ] ビルドコマンド: 空、出力ディレクトリ: `/`
+- [ ] 初回デプロイで `chickenqr.pages.dev` が 200 を返すことを確認
 - [ ] Cloudflare DNS で `chicken-qr.tetutetu214.com` を Pages に CNAME 設定
 - [ ] HTTPS 証明書発行を確認（自動）
-- [ ] 初回デプロイが `chicken-qr.tetutetu214.com` で 200 を返すことを確認（中身は docs と画像だけで OK）
+- [ ] `https://chicken-qr.tetutetu214.com` で動作確認（QR 表示・読取・PNG DL）
 
-### Phase 1: MVP（Codex 委譲）
-- [ ] Codex に index.html / styles.css / app.js の Phase 1 雛形を依頼
-   - URL 入力のみ、ニワトリ画像は `/image/Chicken.png` 固定、PNG ダウンロード
-   - qr-code-styling@1.9.2 を CDN 読み込み
-- [ ] Claude Code が diff レビュー
-- [ ] ローカルでブラウザ確認（QR 読み取りテスト含む）
-- [ ] commit & push
-- [ ] Cloudflare Pages の自動デプロイ完了確認
-- [ ] `chicken-qr.tetutetu214.com` で動作確認
+### 理解度テスト
+- [ ] qr-code-styling の errorCorrectionLevel='H' の意味
+- [ ] Cloudflare Pages と Workers Static Assets の違い
+- [ ] CNAME レコードの役割
 
 ### Phase 2: フル機能（Codex 委譲）
 - [ ] データ種別タブ追加（URL/Text/Wi-Fi/連絡先/Mail/Tel/SMS）
 - [ ] データ種別ごとの入力フォーム
 - [ ] エスケープ・エンコード処理（Wi-Fi / MeCard / vCard / mailto / sms）
 - [ ] SVG ダウンロード追加
-- [ ] レスポンシブ調整（モバイル / デスクトップ）
-- [ ] `_headers` ファイル追加（CSP は Phase 2 末で検討）
+- [ ] レスポンシブ細部調整
+- [ ] `_headers` ファイル追加（CSP 含む）
 
 ### Phase 3: 拡張（任意）
 - [ ] ユーザー画像アップロード対応（FileReader）
 - [ ] Cloudflare Web Analytics 組み込み
-- [ ] 動的 OG 画像（必要に応じて）
+- [ ] 動的 OG 画像
 - [ ] tetutetu214.com 本体サイト構築時にパス統合検討
 
 ### リリース前チェック（Phase 2 完了後）
 - [ ] spec.md の「動作確認チェックリスト」を全項目通す
 - [ ] README 整備（日本語、スクリーンショット込み）
 - [ ] favicon / OGP 設定
-- [ ] LICENSE (MIT) 配置
 
 ---
 
@@ -67,4 +54,8 @@
 - [x] plan.md / spec.md / CLAUDE.md / todo.md / knowledge.md を要件定義書ベースで全面書き換え（2026-05-21）
 - [x] ホスティング方針を「tetutetu214.com 統合」案から「Pages スタンドアロン + サブドメイン CNAME」に修正（2026-05-21）
 - [x] オープン課題を確定: 画像=Chicken.png 1枚固定 / ライセンス=MIT / README=日本語のみ / dev環境=作らない（2026-05-21）
-- [x] **Phase 0-A: ニワトリ画像配置完了**（`image/Chicken.png` をてつてつが配置、2026-05-21）
+- [x] **Phase 0-A: ニワトリ画像配置完了**（`image/Chicken.png`、2026-05-21）
+- [x] **Phase 0-B: GitHub repo 作成完了**（tetutetu214/chickenqr、Secret Scanning + Push Protection 有効化、2026-05-21）
+- [x] **Phase 0-B: PR #1 を feature/initial-setup から main に squash マージ**（docs/CLAUDE.md/LICENSE/.gitignore/README/Chicken.png、commit c6b505b、2026-05-21）
+- [x] **Phase 1 MVP 実装完了**: Codex 委譲で index.html / styles.css / app.js 作成、レビュー後 PR #2 を main に squash マージ（commit 1cf8de0、2026-05-22）
+- [x] **docs/deploy.md 作成**: Cloudflare Pages 連携手順をてつてつ向けにドキュメント化（2026-05-22）
