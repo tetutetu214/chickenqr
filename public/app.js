@@ -24,12 +24,12 @@ function createQrConfig(data) {
     },
     imageOptions: {
       hideBackgroundDots: true,
-      imageSize: 0.45,
+      imageSize: 0.6,
       margin: 0,
       crossOrigin: 'anonymous',
     },
-    dotsOptions: { type: 'rounded', color: '#222' },
-    cornersSquareOptions: { type: 'extra-rounded', color: '#222' },
+    dotsOptions: { type: 'square', color: '#222' },
+    cornersSquareOptions: { type: 'square', color: '#222' },
     backgroundOptions: { color: '#ffffff' },
   };
 }
