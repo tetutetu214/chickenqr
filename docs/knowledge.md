@@ -92,6 +92,20 @@
 - 修正手順: Settings → Builds & deployments → Configure production deployments → Build command を空にして Save → Deployments で Retry
 - **教訓**: 静的サイト（ビルド不要）の Cloudflare Pages 設定では、Build command 欄は必ず空にする。`/` のような分かりにくい値はオプション欄では誤入力されやすいので、ドキュメントには⚠️マークと「何も入れない」を強調して書く
 
+### 2026-05-22: Cloudflare Workers Static Assets として動いた / `.git/` 配信を `public/` 集約で抑止
+- Pages として作ったつもりが Cloudflare 側で Workers Static Assets として動いた
+- Output Directory `.` で `.git/` `docs/` まで配信された（ただしリポジトリパブリックなので新規漏洩は無し）
+- 対応: `public/` ディレクトリ集約 + `wrangler.jsonc` で `assets.directory: "./public"` に固定
+- さらに `not_found_handling: "single-page-application"` だと未配信パスにも index.html を fallback する仕様で「.git/HEAD が見える」誤解を生んだ → `"none"` に変更して 404 を返すように修正
+- **教訓**: Workers Static Assets を選ぶときは `wrangler.jsonc` を最初からリポジトリに入れて配信対象を明示する。SPA でない単一ページサイトは `not_found_handling: "none"` がデフォルト挙動として適切
+
+### 2026-05-22: 中央埋め込み画像はタイトクロップ必須 / `getbbox()` の罠
+- Chicken.png は 1536×1024 でニワトリ本体は中央の小領域のみ、周囲は alpha=0 で透明
+- qr-code-styling は画像の **bounding box** で配置するため、透明領域も余白として QR 中央に確保される → 「画像の周りが空白でダサい」状態
+- 対応: Pillow で alpha > 32 を「実質的に不透明」とみなして bbox を取り、ニワトリだけにトリム後 461×461 の正方形にパディング
+- **`Image.getbbox()` の罠**: alpha > 0 のピクセル全部を bbox に含める仕様。anti-alias で alpha=1〜10 のうっすら残骸があると画像全体が bbox になり「トリムされない」現象が起きる。`alpha.point(lambda p: 255 if p > T else 0).getbbox()` の自前 threshold が必須
+- imageSize は 0.35 → 0.45 に上げ、margin も 0 にしてタイト表示
+
 ### 2026-05-22: Phase 1 MVP は Codex 委譲が完璧に機能
 - 委譲プロンプトに「commit/push/E2E 検証は Claude 側でやる」「Co-Authored-By 提案不要」を明記したところ、Codex は要求範囲内で 3 ファイル（318 行）を生成し終了した
 - 生成された app.js は qr-code-styling パラメータを spec 通り（errorCorrectionLevel='H', imageSize=0.35 など）守り、JSDoc・debounce・初期描画・PNG DL 全てカバー

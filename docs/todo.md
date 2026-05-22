@@ -59,3 +59,6 @@
 - [x] **Phase 0-B: PR #1 を feature/initial-setup から main に squash マージ**（docs/CLAUDE.md/LICENSE/.gitignore/README/Chicken.png、commit c6b505b、2026-05-21）
 - [x] **Phase 1 MVP 実装完了**: Codex 委譲で index.html / styles.css / app.js 作成、レビュー後 PR #2 を main に squash マージ（commit 1cf8de0、2026-05-22）
 - [x] **docs/deploy.md 作成**: Cloudflare Pages 連携手順をてつてつ向けにドキュメント化（2026-05-22）
+- [x] **緊急 fix: public/ 集約 + wrangler.jsonc**（PR #4、Workers Static Assets で .git/ docs/ が配信された件、2026-05-22）
+- [x] **chore: wrangler not_found_handling を none に変更**（未配信パスを404に、commit c69cacd、2026-05-22）
+- [x] **fix: Chicken.png タイトクロップ + imageSize 0.45**（PR #5、中央余白解消、2026-05-22）
