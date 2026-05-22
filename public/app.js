@@ -24,8 +24,8 @@ function createQrConfig(data) {
     },
     imageOptions: {
       hideBackgroundDots: true,
-      imageSize: 0.35,
-      margin: 4,
+      imageSize: 0.45,
+      margin: 0,
       crossOrigin: 'anonymous',
     },
     dotsOptions: { type: 'rounded', color: '#222' },
