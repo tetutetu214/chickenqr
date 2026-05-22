@@ -23,7 +23,7 @@ function createQrConfig(data) {
       errorCorrectionLevel: 'H',
     },
     imageOptions: {
-      hideBackgroundDots: true,
+      hideBackgroundDots: false,
       imageSize: 0.6,
       margin: 0,
       crossOrigin: 'anonymous',
