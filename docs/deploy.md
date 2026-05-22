@@ -25,9 +25,11 @@
    - **Project name**: `chickenqr`（このまま）
    - **Production branch**: `main`
    - **Framework preset**: None
-   - **Build command**: 空のまま
-   - **Build output directory**: `/`（デフォルト）
+   - **Build command**: ⚠️ **完全に空のまま**（`/` などを入れない）
+   - **Build output directory**: `/`（デフォルト、こちらにだけ `/` を入れる）
 7. **Save and Deploy**
+
+> ⚠️ **よくある間違い**: Build command 欄に `/` を入れてしまうと、シェルが `/` をコマンドとして実行しようとして `Permission denied` で失敗する（2026-05-22 に実際に踏んだ）。**Build command は本当に何も入力しない**こと。`/` を入れるのは Build output directory だけ。
 
 初回デプロイが走る。1〜2分で完了し `https://chickenqr.pages.dev` が公開される。
 
@@ -76,6 +78,7 @@
 
 ## トラブルシューティング
 
+- **`/bin/sh: 1: /: Permission denied` でビルド失敗**: Build command 欄に `/` などコマンド以外の値が入っている。Settings → Builds & deployments → Configure production deployments で Build command を**空に修正**して Save、Deployments で Retry
 - **404 が出る**: Build output directory が `/`（ルート）になっているか確認
 - **画像が表示されない**: index.html の `src="/image/Chicken.png"` の大文字小文字を確認（`Chicken.png` は C 大文字）
 - **QR が表示されない**: ブラウザ DevTools の Console と Network タブで `qr-code-styling@1.9.2` が unpkg から 200 で読まれているか確認

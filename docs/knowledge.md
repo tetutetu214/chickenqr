@@ -85,6 +85,13 @@
 - **回避策**: PR マージは `gh api repos/<owner>/<repo>/pulls/<n>/merge -X PUT -f merge_method=squash` で REST API 直叩き。ローカルは `git fetch origin main && git reset --hard origin/main` で別途同期する
 - memory `reference_gh_snap_remote_https.md` の経験則を本プロジェクトでも踏襲、初手から `gh api` を使うのが安全
 
+### 2026-05-22: Cloudflare Pages の Build command 欄に `/` を入れて Permission denied
+- 初回 Cloudflare Pages デプロイで `/bin/sh: 1: /: Permission denied` でビルド失敗
+- 原因: **Build command** 欄に `/` を入力していた。シェルが `/` をコマンドとして実行しようとして拒否された
+- 正解: Build command は**完全に空**、`/` を入れるのは Build output directory だけ
+- 修正手順: Settings → Builds & deployments → Configure production deployments → Build command を空にして Save → Deployments で Retry
+- **教訓**: 静的サイト（ビルド不要）の Cloudflare Pages 設定では、Build command 欄は必ず空にする。`/` のような分かりにくい値はオプション欄では誤入力されやすいので、ドキュメントには⚠️マークと「何も入れない」を強調して書く
+
 ### 2026-05-22: Phase 1 MVP は Codex 委譲が完璧に機能
 - 委譲プロンプトに「commit/push/E2E 検証は Claude 側でやる」「Co-Authored-By 提案不要」を明記したところ、Codex は要求範囲内で 3 ファイル（318 行）を生成し終了した
 - 生成された app.js は qr-code-styling パラメータを spec 通り（errorCorrectionLevel='H', imageSize=0.35 など）守り、JSDoc・debounce・初期描画・PNG DL 全てカバー
