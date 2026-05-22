@@ -23,9 +23,9 @@ function createQrConfig(data) {
       errorCorrectionLevel: 'H',
     },
     imageOptions: {
-      hideBackgroundDots: false,
-      imageSize: 0.6,
-      margin: 0,
+      hideBackgroundDots: true,
+      imageSize: 0.35,
+      margin: 4,
       crossOrigin: 'anonymous',
     },
     dotsOptions: { type: 'square', color: '#222' },
