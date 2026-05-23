@@ -155,6 +155,8 @@ input:focus {
   display: block;
   width: 100%;
   height: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 .site-footer {
