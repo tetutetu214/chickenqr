@@ -62,3 +62,5 @@
 - [x] **緊急 fix: public/ 集約 + wrangler.jsonc**（PR #4、Workers Static Assets で .git/ docs/ が配信された件、2026-05-22）
 - [x] **chore: wrangler not_found_handling を none に変更**（未配信パスを404に、commit c69cacd、2026-05-22）
 - [x] **fix: Chicken.png タイトクロップ + imageSize 0.45**（PR #5、中央余白解消、2026-05-22）
+- [x] **fix: ピクセル粒度の試行錯誤**（PR #6-#10、最終 9a1116b、画像 34×34 / QR width 340 で 1:2 整数比、2026-05-23）
+- [x] **公開動作確認: `https://chickenqr.lemoned-i-scream-art-of-noise.workers.dev/` で QR 表示・PNG DL 動作**（2026-05-23）
