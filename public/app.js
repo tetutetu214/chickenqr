@@ -12,8 +12,8 @@ function getQrData() {
 /** qr-code-styling の固定設定を作成する。 */
 function createQrConfig(data) {
   return {
-    width: 320,
-    height: 320,
+    width: 340,
+    height: 340,
     type: 'canvas',
     data,
     image: '/image/Chicken.png',
