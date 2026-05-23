@@ -18,14 +18,14 @@ function createQrConfig(data) {
     data,
     image: '/image/Chicken.png',
     qrOptions: {
-      typeNumber: 0,
+      typeNumber: 4,
       mode: 'Byte',
       errorCorrectionLevel: 'H',
     },
     imageOptions: {
       hideBackgroundDots: true,
-      imageSize: 0.35,
-      margin: 4,
+      imageSize: 0.5,
+      margin: 0,
       crossOrigin: 'anonymous',
     },
     dotsOptions: { type: 'square', color: '#222' },
